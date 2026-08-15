@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beyond Cosmos</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+font-family:'Space Grotesk',sans-serif;
+background:#030712;
+color:white;
+overflow-x:hidden;
+}
+header{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+padding:22px 8%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:rgba(3,7,18,.35);
+backdrop-filter:blur(18px);
+border-bottom:1px solid rgba(255,255,255,.06);
+z-index:1000;
+}
+
+.logo{
+font-size:28px;
+font-weight:700;
+letter-spacing:1px;
+color:#7dd3fc;
+}
+
+nav ul{
+display:flex;
+list-style:none;
+gap:28px;
+}
+
+nav a{
+text-decoration:none;
+color:#e5e7eb;
+font-size:15px;
+transition:.3s;
+position:relative;
+}
+
+nav a:hover{
+color:#7dd3fc;
+}
+
+nav a::after{
+content:"";
+position:absolute;
+left:0;
+bottom:-6px;
+width:0;
+height:2px;
+background:#7dd3fc;
+transition:.3s;
+}
+
+nav a:hover::after{
+width:100%;
+}
+
+.hero{
+min-height:100vh;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:120px 8%;
+gap:60px;
+}
+
+.hero-content{
+flex:1;
+}
+
+.hero-label{
+font-size:14px;
+letter-spacing:4px;
+text-transform:uppercase;
+color:#38bdf8;
+margin-bottom:18px;
+}
+
+.hero h1{
+font-size:82px;
+line-height:.95;
+font-weight:700;
+margin-bottom:24px;
+}
+
+.hero h1 span{
+display:block;
+color:#7dd3fc;
+}
+
+.hero p{
+font-size:18px;
+line-height:1.8;
+color:#cbd5e1;
+max-width:560px;
+margin-bottom:36px;
+}
+
+.hero-buttons{
+display:flex;
+gap:20px;
+flex-wrap:wrap;
+}
+
+.btn{
+padding:16px 34px;
+border-radius:999px;
+text-decoration:none;
+font-weight:600;
+transition:.35s;
+}
+
+.primary{
+background:linear-gradient(90deg,#2563eb,#06b6d4);
+color:white;
+box-shadow:0 0 30px rgba(37,99,235,.35);
+}
+
+.primary:hover{
+transform:translateY(-4px);
+box-shadow:0 0 40px rgba(6,182,212,.45);
+}
+
+.secondary{
+border:1px solid rgba(125,211,252,.4);
+color:#e5e7eb;
+}
+
+.secondary:hover{
+background:rgba(125,211,252,.08);
+}
+
+.hero-image{
+flex:1;
+display:flex;
+justify-content:center;
+align-items:center;
+position:relative;
+}
+
+.hero-image::before{
+content:"";
+position:absolute;
+width:560px;
+height:560px;
+border-radius:50%;
+background:radial-gradient(circle,
+rgba(37,99,235,.25),
+rgba(6,182,212,.12),
+transparent 70%);
+filter:blur(30px);
+}
+
+.hero-image img{
+width:100%;
+max-width:460px;
+border-radius:50%;
+box-shadow:
+0 0 40px rgba(37,99,235,.35),
+0 0 80px rgba(6,182,212,.2);
+animation:float 7s ease-in-out infinite;
+position:relative;
+z-index:2;
+}
+
+@keyframes float{
+0%{transform:translateY(0);}
+50%{transform:translateY(-18px);}
+100%{transform:translateY(0);}
+}
+
+.stars{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+pointer-events:none;
+z-index:-1;
+}
+
+.stars span{
+position:absolute;
+width:2px;
+height:2px;
+background:white;
+border-radius:50%;
+opacity:.8;
+animation:twinkle linear infinite;
+animation-duration:calc(12s + var(--i) * 1s);
+}
+
+.stars span:nth-child(1){left:8%;top:14%;}
+.stars span:nth-child(2){left:18%;top:34%;}
+.stars span:nth-child(3){left:36%;top:12%;}
+.stars span:nth-child(4){left:52%;top:28%;}
+.stars span:nth-child(5){left:68%;top:18%;}
+.stars span:nth-child(6){left:84%;top:38%;}
+.stars span:nth-child(7){left:12%;top:72%;}
+.stars span:nth-child(8){left:32%;top:86%;}
+.stars span:nth-child(9){left:62%;top:76%;}
+.stars span:nth-child(10){left:88%;top:90%;}
+
+@keyframes twinkle{
+0%{transform:translateY(0) scale(.8);opacity:.3;}
+50%{transform:translateY(-14px) scale(1.5);opacity:1;}
+100%{transform:translateY(-28px) scale(.8);opacity:.2;}
+}
+
+@media(max-width:900px){
+
+.hero{
+flex-direction:column;
+text-align:center;
+padding-top:140px;
+}
+
+.hero h1{
+font-size:56px;
+}
+
+.hero-buttons{
+justify-content:center;
+}
+
+nav ul{
+display:none;
+}
+
+}
+
+.explore{
+padding:120px 8%;
+}
+
+.section-header{
+text-align:center;
+max-width:760px;
+margin:0 auto 70px;
+}
+
+.section-label{
+font-size:14px;
+letter-spacing:4px;
+text-transform:uppercase;
+color:#38bdf8;
+margin-bottom:16px;
+}
+
+.section-header h2{
+font-size:52px;
+margin-bottom:20px;
+}
+
+.section-header p{
+font-size:18px;
+line-height:1.8;
+color:#cbd5e1;
+}
+
+.explore-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:30px;
+}
+
+.explore-card{
+position:relative;
+height:380px;
+border-radius:28px;
+overflow:hidden;
+text-decoration:none;
+color:white;
+transition:.45s;
+background:#111827;
+}
+
+.explore-card img{
+width:100%;
+height:100%;
+object-fit:cover;
+transition:.6s;
+}
+
+.explore-card::after{
+content:"";
+position:absolute;
+inset:0;
+background:linear-gradient(
+to top,
+rgba(0,0,0,.92) 12%,
+rgba(0,0,0,.35) 55%,
+rgba(0,0,0,.05) 100%);
+}
+
+.card-content{
+position:absolute;
+left:28px;
+bottom:28px;
+z-index:2;
+}
+
+.card-content span{
+font-size:13px;
+letter-spacing:2px;
+text-transform:uppercase;
+color:#7dd3fc;
+}
+
+.card-content h3{
+font-size:30px;
+margin-top:12px;
+line-height:1.1;
+}
+
+.explore-card:hover{
+transform:translateY(-12px);
+box-shadow:0 18px 45px rgba(0,0,0,.45);
+}
+
+.explore-card:hover img{
+transform:scale(1.08);
+}
+
+@media(max-width:900px){
+
+.explore-grid{
+grid-template-columns:1fr 1fr;
+}
+
+}
+
+@media(max-width:600px){
+
+.explore-grid{
+grid-template-columns:1fr;
+}
+
+.section-header h2{
+font-size:38px;
+}
+
+}
+
+.discoveries{
+padding:120px 8%;
+}
+
+.discoveries-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:30px;
+}
+
+.discovery-card{
+background:rgba(255,255,255,.04);
+border:1px solid rgba(255,255,255,.08);
+backdrop-filter:blur(14px);
+border-radius:28px;
+padding:36px;
+transition:.4s;
+position:relative;
+overflow:hidden;
+}
+
+.discovery-card::before{
+content:"";
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:1px;
+background:linear-gradient(90deg,
+transparent,
+#38bdf8,
+transparent);
+}
+
+.discovery-card:hover{
+transform:translateY(-10px);
+box-shadow:0 20px 50px rgba(56,189,248,.18);
+border-color:rgba(56,189,248,.25);
+}
+
+.discovery-tag{
+display:inline-block;
+padding:8px 16px;
+border-radius:999px;
+background:rgba(56,189,248,.12);
+border:1px solid rgba(56,189,248,.25);
+color:#7dd3fc;
+font-size:13px;
+font-weight:600;
+margin-bottom:22px;
+}
+
+.discovery-card h3{
+font-size:28px;
+line-height:1.25;
+margin-bottom:18px;
+}
+
+.discovery-card p{
+font-size:16px;
+line-height:1.8;
+color:#cbd5e1;
+margin-bottom:28px;
+}
+
+.discovery-card a{
+color:#7dd3fc;
+text-decoration:none;
+font-weight:600;
+}
+
+.discovery-card a:hover{
+color:#ffffff;
+}
+
+@media(max-width:900px){
+
+.discoveries-grid{
+grid-template-columns:1fr;
+}
+
+}
+.stats{
+padding:120px 8%;
+}
+
+.stats-grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:25px;
+}
+
+.stat-card{
+background:rgba(255,255,255,.04);
+border:1px solid rgba(255,255,255,.08);
+backdrop-filter:blur(14px);
+border-radius:24px;
+padding:40px 20px;
+text-align:center;
+transition:.4s;
+}
+
+.stat-card:hover{
+transform:translateY(-8px);
+box-shadow:0 15px 40px rgba(56,189,248,.2);
+}
+
+.stat-card h3{
+font-size:48px;
+color:#7dd3fc;
+margin-bottom:12px;
+}
+
+.stat-card p{
+color:#cbd5e1;
+font-size:16px;
+line-height:1.6;
+}
+
+@media(max-width:900px){
+
+.stats-grid{
+grid-template-columns:repeat(2,1fr);
+}
+
+}
+
+@media(max-width:600px){
+
+.stats-grid{
+grid-template-columns:1fr;
+}
+
+}
+.reveal{
+opacity:0;
+transform:translateY(80px);
+transition:opacity 1s ease, transform 1s ease;
+}
+
+.reveal.active{
+opacity:1;
+transform:translateY(0);
+}
+
+.footer{
+padding:80px 8% 30px;
+border-top:1px solid rgba(255,255,255,.08);
+background:#02050d;
+}
+
+.footer-container{
+display:grid;
+grid-template-columns:2fr 1fr 1fr;
+gap:60px;
+margin-bottom:40px;
+}
+
+.footer-brand h3{
+font-size:32px;
+color:#7dd3fc;
+margin-bottom:18px;
+}
+
+.footer-brand p{
+color:#cbd5e1;
+line-height:1.8;
+max-width:420px;
+}
+
+.footer-links h4{
+font-size:18px;
+margin-bottom:20px;
+color:white;
+}
+
+.footer-links a{
+display:block;
+color:#94a3b8;
+text-decoration:none;
+margin-bottom:12px;
+transition:.3s;
+}
+
+.footer-links a:hover{
+color:#7dd3fc;
+padding-left:6px;
+}
+
+.footer-bottom{
+padding-top:25px;
+border-top:1px solid rgba(255,255,255,.08);
+text-align:center;
+color:#64748b;
+font-size:14px;
+}
+
+@media(max-width:900px){
+
+.footer-container{
+grid-template-columns:1fr;
+text-align:center;
+}
+
+.footer-brand p{
+margin:0 auto;
+}
+
+}
+</style>
+</head>
+
+<body>
+
+<div class="stars">
+<span style="--i:11;"></span>
+<span style="--i:17;"></span>
+<span style="--i:23;"></span>
+<span style="--i:7;"></span>
+<span style="--i:15;"></span>
+<span style="--i:29;"></span>
+<span style="--i:9;"></span>
+<span style="--i:19;"></span>
+<span style="--i:27;"></span>
+<span style="--i:13;"></span>
+</div>
+
+<header>
+
+<div class="logo">Beyond Cosmos</div>
+
+<nav>
+<ul>
+<li><a href="index.html">Home</a></li>
+<li><a href="exoplanets.html">Exoplanets</a></li>
+<li><a href="dark-matter.html">Dark Matter</a></li>
+<li><a href="neutron-stars.html">Neutron Stars</a></li>
+<li><a href="supernova.html">Supernova</a></li>
+<li><a href="big-bang.html">Big Bang</a></li>
+</ul>
+</nav>
+
+</header>
+<section class="explore reveal" id="explore">
+
+    <div class="section-header">
+        <p class="section-label">Explore the universe</p>
+        <h2>Choose Your Destination</h2>
+        <p>
+            Travel through the most fascinating cosmic phenomena,
+            from alien worlds to the birth of the universe itself.
+        </p>
+    </div>
+
+    <div class="explore-grid">
+
+        <a href="exoplanets.html" class="explore-card">
+            <img src="../images/exoplanet.jfif" alt="Exoplanets">
+            <div class="card-content">
+                <span>Alien worlds</span>
+                <h3>Exoplanets</h3>
+            </div>
+        </a>
+
+        <a href="dark-matter.html" class="explore-card">
+            <img src="../images/darkmatter.jfif" alt="Dark Matter">
+            <div class="card-content">
+                <span>Invisible universe</span>
+                <h3>Dark Matter & Dark Energy</h3>
+            </div>
+        </a>
+
+        <a href="neutron-stars.html" class="explore-card">
+            <img src="../images/neutron star.jfif" alt="Neutron Star">
+            <div class="card-content">
+                <span>Cosmic remnants</span>
+                <h3>Neutron Stars & Pulsars</h3>
+            </div>
+        </a>
+
+        <a href="supernova.html" class="explore-card">
+            <img src="../images/supervova.jfif" alt="Supernova">
+            <div class="card-content">
+                <span>Stellar explosion</span>
+                <h3>Supernova Explosion</h3>
+            </div>
+        </a>
+
+        <a href="big-bang.html" class="explore-card">
+            <img src="../images/big bang.jfif" alt="Big Bang">
+            <div class="card-content">
+                <span>The beginning</span>
+                <h3>The Big Bang Theory</h3>
+            </div>
+        </a>
+
+    </div>
+
+</section>
+<section class="discoveries reveal" id="discoveries">
+
+    <div class="section-header">
+        <p class="section-label">Latest discoveries</p>
+        <h2>The Universe Is Still Revealing Its Secrets</h2>
+        <p>
+            Every discovery changes our understanding of space, time,
+            and the possibility of life beyond Earth.
+        </p>
+    </div>
+
+    <div class="discoveries-grid">
+
+        <article class="discovery-card">
+            <div class="discovery-tag">James Webb</div>
+            <h3>Atmospheric gases detected on distant exoplanets</h3>
+            <p>
+                Scientists have observed water vapor and carbon compounds
+                in the atmosphere of a distant world, bringing us closer
+                to identifying potentially habitable planets.
+            </p>
+            <a href="https://science.nasa.gov/mission/webb/" target="_blank" rel="noopener noreferrer"> Read more →</a>
+        </article>
+
+        <article class="discovery-card">
+            <div class="discovery-tag">Neutron Stars</div>
+            <h3>A pulsar spinning hundreds of times every second</h3>
+            <p>
+                One of the fastest known neutron stars continues to emit
+                incredibly precise radio pulses, helping astronomers
+                study extreme physics.
+            </p>
+            <a href="https://en.wikipedia.org/wiki/Neutron_star"target="_blank" rel="noopener noreferrer">Read more →</a>
+        </article>
+
+        <article class="discovery-card">
+            <div class="discovery-tag">Dark Matter</div>
+            <h3>A new cosmic map reveals hidden structures</h3>
+            <p>
+                Gravitational lensing has revealed the invisible
+                distribution of dark matter across millions of
+                light-years of space.
+            </p>
+            <a href="https://science.nasa.gov/dark-matter/"target="_blank" rel="noopener noreferrer">Read more →</a>
+        </article>
+
+    </div>
+
+</section>
+<section class="stats reveal">
+
+    <div class="section-header">
+        <p class="section-label">The universe in numbers</p>
+        <h2>The Scale of the Cosmos</h2>
+        <p>
+            A few numbers that reveal just how vast and extraordinary the universe truly is.
+        </p>
+    </div>
+
+    <div class="stats-grid">
+
+        <div class="stat-card">
+            <h3>5,900+</h3>
+            <p>Confirmed exoplanets discovered</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>13.8B</h3>
+            <p>Years since the Big Bang</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>2T</h3>
+            <p>Estimated galaxies in the universe</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>100B+</h3>
+            <p>Stars in the Milky Way galaxy</p>
+        </div>
+
+    </div>
+
+</section>
+<script>
+
+const reveals = document.querySelectorAll('.reveal');
+
+function revealOnScroll(){
+
+reveals.forEach((element)=>{
+
+const windowHeight = window.innerHeight;
+const revealTop = element.getBoundingClientRect().top;
+const revealPoint = 120;
+
+if(revealTop < windowHeight - revealPoint){
+element.classList.add('active');
+}else{
+element.classList.remove('active');
+}
+
+});
+
+}
+
+window.addEventListener('scroll', revealOnScroll);
+revealOnScroll();
+
+</script>
+<footer class="footer">
+
+    <div class="footer-container">
+
+        <div class="footer-brand">
+            <h3>Beyond Cosmos</h3>
+            <p>
+                Exploring the mysteries of the universe, from alien worlds
+                to the birth of space and time.
+            </p>
+        </div>
+
+        <div class="footer-links">
+            <h4>Quick Links</h4>
+            <a href="index.html">Home</a>
+            <a href="exoplanets.html">Exoplanets</a>
+            <a href="dark-matter.html">Dark Matter</a>
+            <a href="neutron-stars.html">Neutron Stars</a>
+            <a href="supernova.html">Supernova</a>
+            <a href="big-bang.html">Big Bang</a>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>© 2026 Beyond Cosmos. All Rights Reserved.</p>
+    </div>
+
+</footer>
+</body>
+</html>
